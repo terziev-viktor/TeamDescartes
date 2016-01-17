@@ -10,6 +10,15 @@
 	var looping = false;
 	var totalSeconds = 0;
 
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	if (width >= 500) {
+		width = 320;
+		height = 480;
+	}
+	canvas.width = width;
+	canvas.height = height;
+	
 	var img = new Image();
 	img.onload = imageLoaded;
 	img.src = 'img/background.png';
