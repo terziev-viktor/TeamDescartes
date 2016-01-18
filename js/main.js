@@ -1,30 +1,55 @@
 'use strict';
 var canvas, // the canvas we are drawing on
     ctx, // an object that allows us to draw things on the canvas
-    bird,// TODO: change the name to what we will be using in the game
+    wiz, // Main character of the game
     pipes,
-    gameIsRunning = false;
+    gameIsRunning = false,
+    sprite_wiz; // Holds 4 frames of the main character of our game
+
+// Sprite - holds an image from a spritesheet
+function Sprite(img, x, y, width, height) {
+    this.img = img;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+}
+Sprite.prototype.draw = function(ctx, x, y) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height, // Specify what to draw
+        x, y, this.width, this.height); // Specify where to draw
+};
+
+// img - the spritesheet of our wizard
+function initSprites(img) {
+    sprite_wiz = [
+        new Sprite(img, 0, 0, img.width/4, img.height), // TODO: Check if the position is correct (2nd and 3rd param)
+        new Sprite(img, img.width/4, 0, img.width/4, img.height),
+        new Sprite(img, img.width/2, 0, img.width/4, img.height),
+        new Sprite(img, img.width/4*3, 0, img.width/4, img.height)
+    ]
+}
 
 function init() {
     canvas = document.getElementById('gamefield');
     ctx = canvas.getContext('2d');
-    bird = {
+    wiz = {
         x: 0,
         y: 0,
         rotation: 0,
         gravity: 0.25,
+        frameNum: 0, // index of next sprite from sprite_wiz array that has to be drawn
         jump: function() {
-            // TODO: How will our bird jump ?
+            // TODO: How will our wizard jump ?
         },
         update: function() {
-            // TODO: How will our bird behave ?
+            // TODO: How will our wizard behave ?
         },
         draw: function(ctx) {
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(this.rotation);
 
-            // TODO: The bird should draw itself on the canvas
+            // TODO: The wizard should draw itself on the canvas
 
             ctx.restore();
         }
@@ -46,40 +71,47 @@ function init() {
             ctx.restore();
         }
     };
-
+    var img = new Image();
+    img.src = "./img/wz_anim.png";
+    initSprites(img);
     console.log("canvas, context, bird and pipes initialized");
+    console.log("wizard sprite created");
 }
 
 function update() {
     // Updates all objects in the game
-    bird.update();
+    wiz.update();
     pipes.update();
 }
 
 function render() {
     // Draws all objects in the game on the canvas
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    bird.draw(ctx);
+    wiz.draw(ctx);
+    sprite_wiz[wiz.frameNum++].draw(ctx, 0, 0);
+    if(wiz.frameNum == 3) wiz.frameNum = 0;
     pipes.draw(ctx);
 }
 
 function run() {
     // Updates and draws all objects in the game
     console.log("Start button clicked. Game is running.");
+
     var loop = function() {
         update();
         render();
-        window.requestAnimationFrame(loop, canvas);
+        setTimeout(window.requestAnimationFrame(loop, canvas), 1000000); // TODO: PLS someone to check why this doesn't work !!
     };
-    window.requestAnimationFrame(loop, canvas);
+    setTimeout(window.requestAnimationFrame(loop, canvas), 1000000);
 }
 
 function main() {
     // Starts the game. The function is called when #start-button is clicked.
-    gameIsRunning = true;
-    init();
-    run();
-
+    if(!gameIsRunning) {
+        gameIsRunning = true;
+        init();
+        run();
+    }
 }
 
 document.getElementById('start-button').addEventListener('click', main);
