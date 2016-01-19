@@ -30,8 +30,16 @@ function initSprites(img) {
 }
 
 function init() {
-    canvas = document.getElementById('gamefield');
+    canvas = document.getElementById('gameplay');
     ctx = canvas.getContext('2d');
+    var width = window.innerWidth;
+	var height = window.innerHeight;
+	if (width >= 500) {
+		width = 320;
+		height = 480;
+	}
+	canvas.width = width;
+	canvas.height = height;
     wiz = {
         x: 0,
         y: 0,
@@ -86,9 +94,9 @@ function update() {
 
 function render() {
     // Draws all objects in the game on the canvas
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     wiz.draw(ctx);
-    sprite_wiz[wiz.frameNum++].draw(ctx, 0, 0);
+    sprite_wiz[wiz.frameNum++].draw(ctx, 0, 150);
     if(wiz.frameNum == 3) wiz.frameNum = 0;
     pipes.draw(ctx);
 }

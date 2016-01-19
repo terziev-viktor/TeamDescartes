@@ -9,6 +9,7 @@
 	var context = canvas.getContext('2d');
 	var looping = false;
 	var totalSeconds = 0;
+	var btn = document.getElementById('start-button'); //start button;
 
 	var width = window.innerWidth;
 	var height = window.innerHeight;
@@ -26,7 +27,7 @@
 	function imageLoaded() {
 		draw(0);
 
-		var btn = document.getElementById('start-button');
+		//btn = document.getElementById('start-button');
 		btn.addEventListener('click', function() {
 			startGame();
 		});
@@ -36,8 +37,12 @@
 
 	function startGame() {
 		looping = true;		
-			lastFrameTime = Date.now();
-			requestAnimationFrame(loop);
+		var container = document.getElementById('container');
+		//container.removeChild(btn);
+		btn.remove();
+		//btn = document.getElementById('start-button');
+	    lastFrameTime = Date.now();
+	    requestAnimationFrame(loop);
 	}
 
 	function loop() {
