@@ -96,13 +96,23 @@ function render() {
 function run() {
     // Updates and draws all objects in the game
     console.log("Start button clicked. Game is running.");
-
+    var now;
+    var then;
+    var fps = 1000/15; // 1000 / frames per second;
     var loop = function() {
         update();
         render();
-        setTimeout(window.requestAnimationFrame(loop, canvas), 1000000); // TODO: PLS someone to check why this doesn't work !!
+        now = Date.now();
+        var delta = (now - then);
+        while(delta < fps) {
+            now = Date.now();
+            delta = (now - then);
+        }
+        then = Date.now();
+        window.requestAnimationFrame(loop, canvas);
     };
-    setTimeout(window.requestAnimationFrame(loop, canvas), 1000000);
+    then = Date.now();
+    setTimeout(window.requestAnimationFrame(loop, canvas), 1000);
 }
 
 function main() {
