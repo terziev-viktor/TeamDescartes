@@ -64,7 +64,7 @@
 		var speed = 100; // the background scrolls with a speed of 100
 							// pixels/sec
 		var numImages = Math.ceil(canvas.width / img.width) + 1;
-		var x_pos = totalSeconds * speed % img.width;
+		var x_pos = totalSeconds * speed % img.width
 
 		context.save();
 		context.translate(-x_pos, 0);

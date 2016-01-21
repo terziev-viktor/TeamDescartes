@@ -6,18 +6,15 @@ var app = app || {};
 
 app.engine = (function () {
     function Engine() {
-        this.canvas; // the canvas we are drawing
-        this.ctx; // an object that allows us to draw things on the canvas
-        this.wiz;
-        this.pipe;
+
         this.gameIsRunning = false;
     }
 
-    function _init () {
+     function _init() {
         this.canvas = document.getElementById('gameplay');
         this.ctx = this.canvas.getContext('2d');
-        wiz = app.wizard.load();
-        pipe = app.pipe.load(0,0,0,0); //TODO find appropriate values and make other pipes in array
+        this.wiz = app.wizard.load();
+        this.pipe = app.pipe.load(0,0,0,0); //TODO find appropriate values and make other pipes in array
         var width = window.innerWidth;
         var height = window.innerHeight;
         if (width >= 500) {
@@ -27,31 +24,30 @@ app.engine = (function () {
 
         this.canvas.width = width;
         this.canvas.height = height;
-        console.log("canvas, context, bird and pipes initialized");
+
+        document.body.onclick = this.wiz.jump; //TODO: Implement jump on mouse click
+
+        console.log("canvas, context, wizard and pipes initialized");
         console.log("wizard sprite created");
-    };
+    }
 
     function _update() {
         // Updates all objects in the game
         this.wiz.update();
         this.pipe.update();
-    };
+    }
 
     function _render() {
         // Draws all objects in the game on the canvas
-        document.addEventListener("click", this.wiz.jump()); //TODO find way to implement jump on mouse click
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.wiz.draw(this.ctx);
-        this.wiz.sprite[this.wiz.frameNum++].draw(this.ctx, 0, 150);
-        if(this.wiz.frameNum == 3){
-            this.wiz.frameNum = 0;
-        }
         this.pipe.draw(this.ctx);
-    };
+
+    }
 
      Engine.prototype.run = function() {
         // Updates and draws all objects in the game
-         _init();
+        _init();
         console.log("Start button clicked. Game is running.");
         var now;
         var then;

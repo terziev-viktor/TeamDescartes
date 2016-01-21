@@ -35,8 +35,8 @@ canvas {
 	
 }
 #start-button {
-	position: absolute;
-	z-index: 2;
-	left: 120px;
-	top: 200px;
-}
+	 position: absolute;
+	 z-index: 2;
+	 left: 120px;
+	 top: 200px;
+ }
