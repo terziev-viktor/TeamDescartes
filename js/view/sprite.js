@@ -3,6 +3,7 @@
  */
 
 var app = app || {};
+
 app.sprite = (function () {
     function Sprite(img, x, y, width, height) {
         this.img = img;

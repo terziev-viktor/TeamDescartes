@@ -23,7 +23,7 @@ app.pipe = (function () {
         // TODO: The pipe should draw itself on the canvas
 
         ctx.restore();
-    }
+    };
 
     return {
         load: function(x,y,w,h){
