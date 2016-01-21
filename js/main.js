@@ -6,27 +6,14 @@ var canvas, // the canvas we are drawing on
     gameIsRunning = false,
     sprite_wiz; // Holds 4 frames of the main character of our game
 
-// Sprite - holds an image from a spritesheet
-function Sprite(img, x, y, width, height) {
-    this.img = img;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-}
-Sprite.prototype.draw = function(ctx, x, y) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height, // Specify what to draw
-        x, y, this.width, this.height); // Specify where to draw
-};
-
 // img - the spritesheet of our wizard
 function initSprites(img) {
     sprite_wiz = [
-        new Sprite(img, 0, 0, img.width/4, img.height), // TODO: Check if the position is correct (2nd and 3rd param)
-        new Sprite(img, img.width/4, 0, img.width/4, img.height),
-        new Sprite(img, img.width/2, 0, img.width/4, img.height),
-        new Sprite(img, img.width/4*3, 0, img.width/4, img.height)
-    ]
+        app.sprite.render(img, 0, 0, img.width/4, img.height), // TODO: Check if the position is correct (2nd and 3rd param)
+        app.sprite.render(img, img.width/4, 0, img.width/4, img.height),
+        app.sprite.render(img, img.width/2, 0, img.width/4, img.height),
+        app.sprite.render(img, img.width/4*3, 0, img.width/4, img.height)
+    ];
 }
 
 function init() {
