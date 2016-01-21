@@ -28,7 +28,7 @@ app.wizard = (function () {
         ctx.rotate(this.rotation);
 
         // TODO: The wizard should draw itself on the canvas
-        ctx.drawImage(this.image, 10, 10, 50,50);
+        //ctx.drawImage(this.image, 10, 10, 50,50);
 
         ctx.restore();
     };

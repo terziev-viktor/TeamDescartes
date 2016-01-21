@@ -2,7 +2,7 @@
 var canvas, // the canvas we are drawing on
     ctx, // an object that allows us to draw things on the canvas
     wiz = app.wizard.load(),
-    pipes,
+    pipe = app.pipe.load(0,0,0,0), //TODO find appropriate values and make other pipes in array
     gameIsRunning = false,
     sprite_wiz; // Holds 4 frames of the main character of our game
 
@@ -41,23 +41,6 @@ function init() {
 	canvas.width = width;
 	canvas.height = height;
 
-    pipes = {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        update: function() {
-            // TODO: How will our pipes behave ?
-        },
-        draw: function(ctx) {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rotation);
-
-            // TODO: The pipe should draw itself on the canvas
-
-            ctx.restore();
-        }
-    };
     var img = new Image();
     img.src = "./img/wz_anim.png";
     initSprites(img);
@@ -68,7 +51,7 @@ function init() {
 function update() {
     // Updates all objects in the game
     wiz.update();
-    pipes.update();
+    pipe.update();
 }
 
 function render() {
@@ -77,7 +60,7 @@ function render() {
     wiz.draw(ctx);
     sprite_wiz[wiz.frameNum++].draw(ctx, 0, 150);
     if(wiz.frameNum == 3) wiz.frameNum = 0;
-    pipes.draw(ctx);
+    pipe.draw(ctx);
 }
 
 function run() {
