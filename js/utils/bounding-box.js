@@ -1,0 +1,30 @@
+/**
+ * Created by Iliyan on 20-Jan-16.
+ */
+
+var BoundingBox = (function() {
+    function BoundingBox(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
+        this.color = new Color();
+    }
+
+    BoundingBox.prototype.intersects = function(shape) {
+        var offset = 0;
+
+        if(this.contains(shape.x - offset, shape.y - offset) ||
+            this.contains(shape.x + shape.width - offset, shape.y - offset)||
+            this.contains(shape.x - offset, shape.y+shape.height - offset)||
+            this.contains(shape.x + shape.width - offset, shape.y+shape.height - offset)) {
+            return true;
+        } else if(shape.contains(this.x - offset, this.y - offset) ||
+            shape.contains(this.x + this.width - offset, this.y - offset)||
+            shape.contains(this.x - offset, this.y + this.height - offset)||
+            shape.contains(this.x + this.width - offset, this.y + this.height - offset)) {
+            return true;
+        }
+        return false;
+    };
+}());

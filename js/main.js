@@ -1,7 +1,7 @@
 'use strict';
 var canvas, // the canvas we are drawing on
     ctx, // an object that allows us to draw things on the canvas
-    wiz, // Main character of the game
+    wiz = wizard.init(),
     pipes,
     gameIsRunning = false,
     sprite_wiz; // Holds 4 frames of the main character of our game
@@ -40,28 +40,7 @@ function init() {
 	}
 	canvas.width = width;
 	canvas.height = height;
-    wiz = {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        gravity: 0.25,
-        frameNum: 0, // index of next sprite from sprite_wiz array that has to be drawn
-        jump: function() {
-            // TODO: How will our wizard jump ?
-        },
-        update: function() {
-            // TODO: How will our wizard behave ?
-        },
-        draw: function(ctx) {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rotation);
 
-            // TODO: The wizard should draw itself on the canvas
-
-            ctx.restore();
-        }
-    };
     pipes = {
         x: 0,
         y: 0,
@@ -133,6 +112,9 @@ function main() {
 }
 
 document.getElementById('start-button').addEventListener('click', main);
+
+document.addEventListener("click", wiz.jump());
+
 
 
 
