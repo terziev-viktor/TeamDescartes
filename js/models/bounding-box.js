@@ -1,14 +1,14 @@
 /**
  * Created by Iliyan on 20-Jan-16.
  */
+var app = app || {};
 
-var BoundingBox = (function() {
+app.boundingBox = (function() {
     function BoundingBox(x, y, w, h) {
         this.x = x;
         this.y = y;
         this.width = w;
         this.height = h;
-        this.color = new Color();
     }
 
     BoundingBox.prototype.intersects = function(shape) {
@@ -27,4 +27,11 @@ var BoundingBox = (function() {
         }
         return false;
     };
+
+    return {
+        load: function (x, y, w, h) {
+            return new BoundingBox(x, y, w, h);
+        }
+    }
+
 }());

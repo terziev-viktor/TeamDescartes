@@ -1,7 +1,7 @@
 'use strict';
 var canvas, // the canvas we are drawing on
     ctx, // an object that allows us to draw things on the canvas
-    wiz = wizard.init(),
+    wiz = app.wizard.load(),
     pipes,
     gameIsRunning = false,
     sprite_wiz; // Holds 4 frames of the main character of our game

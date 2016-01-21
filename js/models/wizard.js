@@ -1,18 +1,19 @@
 /**
  * Created by Iliyan on 20-Jan-16.
  */
+var app = app || {};
 
-var wizard = (function () {
+app.wizard = (function () {
     function Wizard (){
         this.x = 20;
-        this.y = canvas.height / 2;
-        this.height = 0; //TODO find appropriate values
-        this.width = 0; //TODO find appropriate values
+        this.y = 240;
+        this.height = 0; //TODO find appropriate value
+        this.width = 0; //TODO find appropriate value
         this.image = new Image();
-        this.image.src = 'img/wz_anim.png'
+        this.image.src = 'img/wz_anim.png';
         this.gravity = 0.25;
         this.frameNum = 0; // index of next sprite from sprite_wiz array that has to be drawn
-        this.boundingBox = new BoundingBox(this.x,this.y,this.width, this.height);
+        this.boundingBox = app.boundingBox.load(this.x,this.y,this.width, this.height);
     }
 
     Wizard.prototype.jump = function () {
@@ -33,8 +34,9 @@ var wizard = (function () {
     };
 
     return {
-        init: function () {
+        load: function () {
             return new Wizard();
         }
     }
+
 }());
