@@ -96,7 +96,7 @@ function render() {
     // Draws all objects in the game on the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     wiz.draw(ctx);
-    sprite_wiz[wiz.frameNum++].draw(ctx, 0, 150);
+    sprite_wiz[wiz.frameNum++].draw(ctx, 5, 150);
     if(wiz.frameNum == 3) wiz.frameNum = 0;
     pipes.draw(ctx);
 }
