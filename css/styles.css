@@ -39,6 +39,7 @@ canvas {
 	border-radius: 5px;
 	z-index: -1;
 }
+
 #gameplay {
 	z-index: 1;
 	
@@ -59,6 +60,8 @@ button {
 #start-button {
 	 position: absolute;
 	 z-index: 2;
-	 left: 120px;
+	 left: 112px;
 	 top: 200px;
+	 max-width: 96px;
+	 
  }
