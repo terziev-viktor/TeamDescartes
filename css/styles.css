@@ -1,3 +1,10 @@
+/***General Styles***/
+
+@font-face {
+    font-family: PixelFont;
+    src: url(../fonts/pixel-font/00TT.TTF);
+}
+
 body {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
@@ -19,6 +26,8 @@ h1 {
 	text-align: center;
 }
 
+
+/***Canvas Styles***/
 canvas {
 	left: 0px;
 	top: 0px;
@@ -34,9 +43,19 @@ canvas {
 	z-index: 1;
 	
 }
+
+/***Buttons Styles***/
+
 #start-button {
 	 position: absolute;
 	 z-index: 2;
 	 left: 120px;
 	 top: 200px;
+	 padding: 5px;
+	 border: 0.23em #FDFEFD solid;
+	 background-color: #E86100;
+	 color: #FFFFFF;
+	 font-family: PixelFont;
+	 font-weight: bold;
+	 font-size: 0.85em;
  }
