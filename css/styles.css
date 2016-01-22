@@ -46,11 +46,7 @@ canvas {
 
 /***Buttons Styles***/
 
-#start-button {
-	 position: absolute;
-	 z-index: 2;
-	 left: 120px;
-	 top: 200px;
+button {
 	 padding: 5px;
 	 border: 0.23em #FDFEFD solid;
 	 background-color: #E86100;
@@ -58,4 +54,11 @@ canvas {
 	 font-family: PixelFont;
 	 font-weight: bold;
 	 font-size: 0.85em;
+}
+
+#start-button {
+	 position: absolute;
+	 z-index: 2;
+	 left: 120px;
+	 top: 200px;
  }
