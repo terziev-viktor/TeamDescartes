@@ -6,7 +6,7 @@ var app = app || {};
 app.wizard = (function () {
     function Wizard (){
         this.x = 5;
-        this.y = 50;
+        this.y = 60;
         this.height = 0; //TODO find appropriate value
         this.width = 0; //TODO find appropriate value
         this.img = new Image();
@@ -30,7 +30,7 @@ app.wizard = (function () {
     };
     Wizard.prototype.update = function(){
         this.y += this.gravity;
-        console.log('update function is jumping = ' + this.isJumping)
+        console.log('update function is jumping = ' + this.isJumping);
         if(Wizard.isJumping == true) {
             this.y -= 5;
             this.jumpHeight -= 2;
@@ -39,18 +39,18 @@ app.wizard = (function () {
             this.jumpHeight = 20;
             Wizard.isJumping = false;
         }
-
+        if(this.y <= 20 || this.y >= 190) {return false;} // If the wiz hits the ground/sky
+        return true;
     };
     Wizard.prototype.draw = function(ctx){
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
-
         this.sprite[this.frameNum++].draw(ctx, this.x, this.y);
         if(this.frameNum == 3){
             this.frameNum = 0;
         }
-
+        console.log('Wizard drawn');
         ctx.restore();
     };
 

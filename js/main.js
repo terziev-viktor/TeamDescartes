@@ -5,6 +5,7 @@ function main() {
     document.getElementById('start-button').style.visibility = 'hidden';
     if(!engine.gameIsRunning) {
         engine.gameIsRunning = true;
+        console.log('main.js -> game is running');
         engine.run();
     }
 }
