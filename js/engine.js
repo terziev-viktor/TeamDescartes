@@ -8,6 +8,7 @@ app.engine = (function () {
     function Engine() {
 
         this.gameIsRunning = false;
+        this.gameIsOver = false;
     }
 
      function _init() {
@@ -33,7 +34,10 @@ app.engine = (function () {
 
     function _update() {
         // Updates all objects in the game
-        this.wiz.update();
+        if(!this.wiz.update()) {// true if the wizard is alive and false if otherwise
+            this.gameIsOver = true;
+            console.log('WIZARD DIED');
+        }
         this.pipe.update();
     }
 
@@ -53,16 +57,21 @@ app.engine = (function () {
         var then;
         var fps = 1000/15; // 1000 / frames per second;
         var loop = function() {
-            _update();
-            _render();
-            now = Date.now();
-            var delta = (now - then);
-            while(delta < fps) {
+            if(!this.gameIsOver) {
+                _update();
+                _render();
                 now = Date.now();
-                delta = (now - then);
+                var delta = (now - then);
+                while (delta < fps) {
+                    now = Date.now();
+                    delta = (now - then);
+                }
+                then = Date.now();
+                window.requestAnimationFrame(loop, this.canvas);
+            } else {
+                // TODO: Implement animation for game-over state
+                console.log('game stopped');
             }
-            then = Date.now();
-            window.requestAnimationFrame(loop, this.canvas);
         };
 
         then = Date.now();
