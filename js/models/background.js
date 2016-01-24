@@ -1,77 +1,39 @@
-(function() {
-	window.requestAnimationFrame = window.requestAnimationFrame
-			|| window.webkitRequestAnimationFrame
-			|| window.mozRequestAnimationFrame || function(callback) {
-				window.setTimeout(callback, 1000 / 60);
-			};
 
-	var canvas = document.getElementById('gamefield');
-	var context = canvas.getContext('2d');
-	var looping = false;
-	var totalSeconds = 0;
-	var btn = document.getElementById('start-button'); //start button;
+var app = app || {};
 
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-	if (width >= 500) {
-		width = 320;
-		height = 480;
+
+app.background = (function () {
+
+	function Background(can) {
+		this.canvas = can;
+		this.img = new Image();
+		this.img = new Image();
+		this.x = 0;
+		this.y = 0;
+		this.img.src = 'img/background.png';
+		this.sprite = app.sprite.render(this.img, 0, 0, this.img.width, this.img.height);
 	}
-	canvas.width = width;
-	canvas.height = height;
-	
-	var img = new Image();
-	img.onload = imageLoaded;
-	img.src = 'img/background.png';
+	Background.prototype.update = function () {
+		this.x--;
+		if(this.x < -this.img.width) { this.x = 0;}
+	};
+	Background.prototype.draw = function(ctx) {
+		ctx.save();
+		ctx.translate(this.x, this.y);
+		ctx.rotate(this.rotation);
 
-	function imageLoaded() {
-		draw(0);
+		var pat=ctx.createPattern(this.img,"repeat");
+		ctx.rect(this.x, this.y, this.img.width, this.img.height);
+		ctx.fillStyle=pat;
+		ctx.fill();
+		ctx.restore();
+	};
 
-		//btn = document.getElementById('start-button');
-		btn.addEventListener('click', function() {
-			startGame();
-		});
-	}
-
-	var lastFrameTime = 0;
-
-	function startGame() {
-		looping = true;		
-		var container = document.getElementById('container');
-		//container.removeChild(btn);
-		btn.remove();
-		//btn = document.getElementById('start-button');
-	    lastFrameTime = Date.now();
-	    requestAnimationFrame(loop);
-	}
-
-	function loop() {
-		if (!looping) {
-			return;
+	return {
+		load: function () {
+			return new Background();
 		}
-
-		requestAnimationFrame(loop);
-
-		var now = Date.now();
-		var deltaSeconds = (now - lastFrameTime) / 1000;
-		lastFrameTime = now;
-		draw(deltaSeconds);
 	}
 
-	function draw(delta) {
-		totalSeconds += delta;
-
-		var speed = 100; // the background scrolls with a speed of 100
-							// pixels/sec
-		var numImages = Math.ceil(canvas.width / img.width) + 1;
-		var x_pos = totalSeconds * speed % img.width
-
-		context.save();
-		context.translate(-x_pos, 0);
-		for (var i = 0; i < numImages; i++) {
-			context.drawImage(img, i * img.width, 0);
-		}
-		context.restore();
-	}
 }());
 

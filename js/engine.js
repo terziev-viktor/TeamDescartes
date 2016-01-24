@@ -14,6 +14,7 @@ app.engine = (function () {
      function _init() {
         this.canvas = document.getElementById('gameplay');
         this.ctx = this.canvas.getContext('2d');
+        this.bckg = app.background.load(this.canvas);
         this.wiz = app.wizard.load();
         this.pipe = app.pipe.load(0,0,0,0); //TODO find appropriate values and make other pipes in array
         var width = window.innerWidth;
@@ -39,11 +40,17 @@ app.engine = (function () {
             console.log('WIZARD DIED');
         }
         this.pipe.update();
+        this.bckg.update();
     }
 
     function _render() {
         // Draws all objects in the game on the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.bckg.draw(this.ctx);
+        this.bckg.update();
+        this.bckg.draw(this.ctx);
+        this.bckg.update();
+        this.bckg.draw(this.ctx);
         this.wiz.draw(this.ctx);
         this.pipe.draw(this.ctx);
 
@@ -55,11 +62,9 @@ app.engine = (function () {
         console.log("Start button clicked. Game is running.");
         var now;
         var then;
-        var fps = 1000/15; // 1000 / frames per second;
+        var fps = 1000/20; // 1000 / frames per second;
         var loop = function() {
             if(!this.gameIsOver) {
-                _update();
-                _render();
                 now = Date.now();
                 var delta = (now - then);
                 while (delta < fps) {
@@ -67,6 +72,8 @@ app.engine = (function () {
                     delta = (now - then);
                 }
                 then = Date.now();
+                _update();
+                _render();
                 window.requestAnimationFrame(loop, this.canvas);
             } else {
                 // TODO: Implement animation for game-over state
