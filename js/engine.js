@@ -49,8 +49,6 @@ app.engine = (function () {
         this.bckg.draw(this.ctx);
         this.bckg.update();
         this.bckg.draw(this.ctx);
-        this.bckg.update();
-        this.bckg.draw(this.ctx);
         this.wiz.draw(this.ctx);
         this.pipe.draw(this.ctx);
 

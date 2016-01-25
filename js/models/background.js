@@ -11,15 +11,16 @@ app.background = (function () {
 		this.x = 0;
 		this.y = 0;
 		this.img.src = 'img/background.png';
+		this.delta = this.img.width;
 		this.sprite = app.sprite.render(this.img, 0, 0, this.img.width, this.img.height);
 	}
 	Background.prototype.update = function () {
-		this.x--;
-		if(this.x < -this.img.width) { this.x = 0;}
+		this.x = (this.delta--) % this.img.width;
+		if(this.delta < 0) {this.delta = this.img.width;}
 	};
 	Background.prototype.draw = function(ctx) {
 		ctx.save();
-		ctx.translate(this.x, this.y);
+		ctx.translate(this.x--, this.y);
 		ctx.rotate(this.rotation);
 
 		var pat=ctx.createPattern(this.img,"repeat");
