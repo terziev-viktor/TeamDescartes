@@ -5,7 +5,9 @@ var app = app || {};
 
 app.wizard = (function () {
     function Wizard (){
-        this.x = 5;
+        this.floatInJumpCounter = 0;
+        this.reachEndPointOfJump = false;
+        this.x = 25;
         this.y = 60;
         this.height = 0; //TODO find appropriate value
         this.width = 0; //TODO find appropriate value
@@ -29,6 +31,15 @@ app.wizard = (function () {
         if(Wizard.isJumping == 1) console.log('jump function called! isJumping = ' + Wizard.isJumping);
     };
     Wizard.prototype.update = function(){
+        if (this.reachEndPointOfJump){
+            if (this.floatInJumpCounter == 3){
+                this.reachEndPointOfJump = false;
+                this.floatInJumpCounter = 0;
+            }
+            this.floatInJumpCounter++;
+        }else {
+            this.gravity = 2;
+        }
         this.y += this.gravity;
         console.log('update function is jumping = ' + this.isJumping);
         if(Wizard.isJumping == true) {
@@ -36,8 +47,10 @@ app.wizard = (function () {
             this.jumpHeight -= 2;
         }
         if(this.jumpHeight == 0) {
-            this.jumpHeight = 20;
+            this.jumpHeight = 26;
             Wizard.isJumping = false;
+            this.reachEndPointOfJump = true;
+            this.gravity = 0;
         }
         if(this.y <= 20 || this.y >= 190) {return false;} // If the wiz hits the ground/sky
         return true;
@@ -53,6 +66,10 @@ app.wizard = (function () {
         console.log('Wizard drawn');
         ctx.restore();
     };
+
+    function _wizardFloatFlying(){
+
+    }
 
     return {
         load: function () {

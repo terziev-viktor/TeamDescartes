@@ -59,7 +59,7 @@ app.engine = (function () {
         console.log("Start button clicked. Game is running.");
         var now;
         var then;
-        var fps = 50; // 1000 / frames per second;
+        var fps = 37; // 1000 / frames per second;
         var loop = function() {
             if(!this.gameIsOver) {
                 now = Date.now();
