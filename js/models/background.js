@@ -23,7 +23,7 @@ app.background = (function () {
 		ctx.translate(this.x--, this.y);
 		ctx.rotate(this.rotation);
 
-		var pat=ctx.createPattern(this.img,"repeat");
+		var pat=ctx.createPattern(this.img, "repeat");
 		ctx.rect(this.x, this.y, this.img.width, this.img.height);
 		ctx.fillStyle=pat;
 		ctx.fill();

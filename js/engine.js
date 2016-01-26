@@ -45,7 +45,6 @@ app.engine = (function () {
 
     function _render() {
         // Draws all objects in the game on the canvas
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.bckg.draw(this.ctx);
         this.bckg.update();
         this.bckg.draw(this.ctx);
@@ -60,7 +59,7 @@ app.engine = (function () {
         console.log("Start button clicked. Game is running.");
         var now;
         var then;
-        var fps = 1000/20; // 1000 / frames per second;
+        var fps = 50; // 1000 / frames per second;
         var loop = function() {
             if(!this.gameIsOver) {
                 now = Date.now();
@@ -69,6 +68,7 @@ app.engine = (function () {
                     now = Date.now();
                     delta = (now - then);
                 }
+
                 then = Date.now();
                 _update();
                 _render();
