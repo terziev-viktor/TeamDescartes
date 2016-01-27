@@ -20,8 +20,7 @@ app.background = (function () {
 	};
 	Background.prototype.draw = function(ctx) {
 		ctx.save();
-		ctx.translate(this.x--, this.y);
-		ctx.rotate(this.rotation);
+		ctx.translate(this.x, this.y);
 
 		var pat=ctx.createPattern(this.img, "repeat");
 		ctx.rect(this.x, this.y, this.img.width, this.img.height);

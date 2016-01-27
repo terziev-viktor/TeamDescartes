@@ -53,8 +53,7 @@ app.engine = (function () {
 
     function _render() {
         // Draws all objects in the game on the canvas
-        this.bckg.draw(this.ctx);
-        this.bckg.update();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.bckg.draw(this.ctx);
         this.wiz.draw(this.ctx, this.gameIsOver);
         this.pipe.draw(this.ctx);
